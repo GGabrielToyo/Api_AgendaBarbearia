@@ -28,8 +28,14 @@ public class BarbeiroController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosDetalhamentoBarbeiro>> listar(Pageable paginacao) {
+    public ResponseEntity<Page<DadosDetalhamentoBarbeiro>> listarAtivos(Pageable paginacao) {
         var lista = repository.findAllByAtivoTrue(paginacao).map(DadosDetalhamentoBarbeiro::new);
+        return ResponseEntity.ok(lista);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Page<DadosDetalhamentoBarbeiro>> listarTodos(Pageable paginacao) {
+        var lista = repository.findAll(paginacao).map(DadosDetalhamentoBarbeiro::new);
         return ResponseEntity.ok(lista);
     }
 

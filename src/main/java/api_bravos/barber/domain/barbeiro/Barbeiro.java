@@ -31,10 +31,10 @@ public class Barbeiro {
     }
 
     public void atualizarInformacoes(DadosEditarBarbeiro dados) {
-        if (dados.nome() != null || dados.nome() != this.nome) {
+        if (dados.nome() != null && dados.nome() != this.nome) {
             this.nome = dados.nome();
         }
-        if (dados.email() != null || dados.email() != this.email) {
+        if (dados.email() != null && dados.email() != this.email) {
             this.email = dados.email();
         }
     }

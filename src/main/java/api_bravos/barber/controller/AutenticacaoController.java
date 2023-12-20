@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/login")
 public class AutenticacaoController {
 
     @Autowired
@@ -22,10 +22,7 @@ public class AutenticacaoController {
     @Autowired
     private TokenService tokenService;
 
-    @Autowired
-    private UsuarioRepository repository;
-
-    @PostMapping("/login")
+    @PostMapping()
     public ResponseEntity login(@RequestBody @Valid DadosAutenticacao dados) {
         try {
             var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
@@ -38,22 +35,5 @@ public class AutenticacaoController {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
-
-    @PostMapping("/cadastrar")
-    @Transactional
-    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroUsuario dados, UriComponentsBuilder uriBuilder) {
-        var usuario = new Usuario(dados);
-        repository.save(usuario);
-        var uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoUsuario(usuario));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity detalhar(@PathVariable Long id) {
-        var usuario = repository.getReferenceById(id);
-
-        return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
     }
 }

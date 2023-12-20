@@ -22,12 +22,18 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nome;
+    private String telefone;
     private String login;
     private String senha;
+    private boolean ativo;
 
     public Usuario(DadosCadastroUsuario dados){
+        this.nome = dados.nome();
+        this.telefone = dados.telefone();
         this.login = dados.login();
         this.senha = encriptografarSenha(dados.senha());
+        this.ativo = true;
     }
 
     private String encriptografarSenha(String senha) {
@@ -70,5 +76,18 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void atualizarInformacoes(DadosEditarUsuario dados) {
+        if(dados.nome() != null && dados.nome() != this.nome) {
+            this.nome = dados.nome();
+        }
+        if(dados.telefone() != null && dados.telefone() != this.telefone) {
+            this.telefone = dados.telefone();
+        }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

@@ -6,4 +6,6 @@ import java.time.LocalDateTime;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
     boolean existsByBarbeiroIdAndDataAndMotivoCancelamentoIsNull(Long idBarbeiro, LocalDateTime data);
+
+    boolean existsByUsuarioIdAndDataAndMotivoCancelamentoIsNull(Long idUsuario, LocalDateTime data);
 }

@@ -1,7 +1,5 @@
 package api_bravos.barber.domain.agendamentos;
 
-import com.sun.jdi.LongValue;
-
 import java.time.LocalDateTime;
 
 public record DadosDetalhamentoAgendamento(

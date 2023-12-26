@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Optional;
-
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     UserDetails findByLogin(String login);
 
     Page<Usuario> findAllByAtivoTrue(Pageable paginacao);
 
-    @Query("select u.ativo from Usuario u where u.id = :idUsuario")
+    @Query("""
+           select u.ativo from Usuario u where u.id = :idUsuario
+           """)
     boolean findAtivoById(Long idUsuario);
 }

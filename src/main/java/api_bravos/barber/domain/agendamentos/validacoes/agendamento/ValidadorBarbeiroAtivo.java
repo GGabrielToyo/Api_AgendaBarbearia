@@ -1,7 +1,7 @@
 package api_bravos.barber.domain.agendamentos.validacoes.agendamento;
 
-import api_bravos.barber.domain.ValidacaoException;
 import api_bravos.barber.domain.agendamentos.DadosAgendamento;
+import api_bravos.barber.domain.ValidacaoException;
 import api_bravos.barber.domain.barbeiro.BarbeiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

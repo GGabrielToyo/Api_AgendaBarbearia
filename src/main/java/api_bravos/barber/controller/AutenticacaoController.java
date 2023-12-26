@@ -1,6 +1,7 @@
 package api_bravos.barber.controller;
 
-import api_bravos.barber.domain.usuario.*;
+import api_bravos.barber.domain.usuario.DadosAutenticacao;
+import api_bravos.barber.domain.usuario.Usuario;
 import api_bravos.barber.infra.security.DadosTokenJWT;
 import api_bravos.barber.infra.security.TokenService;
 import jakarta.validation.Valid;
@@ -8,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/login")

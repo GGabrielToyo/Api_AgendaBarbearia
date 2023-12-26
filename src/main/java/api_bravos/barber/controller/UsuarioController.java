@@ -1,7 +1,5 @@
 package api_bravos.barber.controller;
 
-import api_bravos.barber.domain.barbeiro.DadosDetalhamentoBarbeiro;
-import api_bravos.barber.domain.barbeiro.DadosEditarBarbeiro;
 import api_bravos.barber.domain.usuario.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

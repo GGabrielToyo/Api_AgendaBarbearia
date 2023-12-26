@@ -1,15 +1,15 @@
 package api_bravos.barber.domain.agendamentos.validacoes.cancelamento;
 
-import api_bravos.barber.domain.ValidacaoException;
 import api_bravos.barber.domain.agendamentos.AgendamentoRepository;
 import api_bravos.barber.domain.agendamentos.DadosCancelamentoAgendamento;
+import api_bravos.barber.domain.ValidacaoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-@Component("ValidadorHorarioAntecedencia")
+@Component("ValidadorHorarioAntecedenciaCancelamento")
 public class ValidadorHorarioAntecedencia implements ValidadorCancelamentoAgendamento {
 
     @Autowired

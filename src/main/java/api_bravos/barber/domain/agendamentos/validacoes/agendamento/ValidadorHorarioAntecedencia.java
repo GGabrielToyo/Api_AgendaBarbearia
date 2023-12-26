@@ -1,13 +1,13 @@
 package api_bravos.barber.domain.agendamentos.validacoes.agendamento;
 
-import api_bravos.barber.domain.ValidacaoException;
 import api_bravos.barber.domain.agendamentos.DadosAgendamento;
+import api_bravos.barber.domain.ValidacaoException;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-@Component("ValidadorHorarioAntecedencia")
+@Component("ValidadorHorarioAntecedenciaAgendamento")
 public class ValidadorHorarioAntecedencia implements ValidadorAgendamento{
     public void validar(DadosAgendamento dados) {
         var dataAgendamento = dados.data();

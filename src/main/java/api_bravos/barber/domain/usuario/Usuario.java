@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,11 +28,13 @@ public class Usuario implements UserDetails {
     private String login;
     private String senha;
     private boolean ativo;
+    private LocalDateTime nascimento;
 
     public Usuario(DadosCadastroUsuario dados){
         this.nome = dados.nome();
         this.telefone = dados.telefone();
         this.login = dados.login();
+        this.nascimento = dados.nascimento();
         this.senha = encriptografarSenha(dados.senha());
         this.ativo = true;
     }

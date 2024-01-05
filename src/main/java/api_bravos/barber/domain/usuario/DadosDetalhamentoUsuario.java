@@ -1,5 +1,7 @@
 package api_bravos.barber.domain.usuario;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.time.LocalDateTime;
 
 public record DadosDetalhamentoUsuario(
@@ -11,4 +13,5 @@ public record DadosDetalhamentoUsuario(
     public DadosDetalhamentoUsuario(Usuario usuario){
         this(usuario.getId(), usuario.getLogin(), usuario.getNome(), usuario.getTelefone(), usuario.getNascimento());
     }
+
 }

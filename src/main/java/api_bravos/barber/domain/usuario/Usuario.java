@@ -1,9 +1,11 @@
 package api_bravos.barber.domain.usuario;
 
+import api_bravos.barber.infra.security.TokenService;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -85,8 +87,17 @@ public class Usuario implements UserDetails {
         if(dados.nome() != null && dados.nome() != this.nome) {
             this.nome = dados.nome();
         }
+        if(dados.nascimento() != null && dados.nascimento() != this.nascimento) {
+            this.nascimento = dados.nascimento();
+        }
         if(dados.telefone() != null && dados.telefone() != this.telefone) {
             this.telefone = dados.telefone();
+        }
+        if(dados.login() != null && dados.login() != this.login) {
+            this.login = dados.login();
+        }
+        if(dados.senha() != null && !this.senha.equals(encriptografarSenha(dados.senha()))) {
+            this.senha = encriptografarSenha(dados.senha());
         }
     }
 

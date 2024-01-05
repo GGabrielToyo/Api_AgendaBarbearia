@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.math.BigInteger;
+
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     UserDetails findByLogin(String login);
 
@@ -15,4 +17,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
            select u.ativo from Usuario u where u.id = :idUsuario
            """)
     boolean findAtivoById(Long idUsuario);
+
+    Usuario findUsuarioByLogin(String login);
+
 }

@@ -1,6 +1,8 @@
 package api_bravos.barber.controller;
 
 import api_bravos.barber.domain.usuario.*;
+import api_bravos.barber.infra.security.TokenService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,14 +19,17 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository repository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @PostMapping("/cadastrar")
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroUsuario dados, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DadosDetalhamentoUsuario> cadastrar(@RequestBody @Valid DadosCadastroUsuario dados, UriComponentsBuilder uriBuilder) {
         var usuario = new Usuario(dados);
         repository.save(usuario);
         var uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoUsuario(usuario));
+        System.out.println(dados);
+       return ResponseEntity.created(uri).body(new DadosDetalhamentoUsuario(usuario));
     }
 
     @GetMapping
@@ -39,19 +44,18 @@ public class UsuarioController {
         return ResponseEntity.ok(lista);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity detalhar(@PathVariable Long id) {
-        var usuario = repository.getReferenceById(id);
-
+    @GetMapping("/perfil")
+    public ResponseEntity detalhar(HttpServletRequest request) {
+        var login = usuarioService.getLoginUsuario(request.getHeader("Authorization"));
+        var usuario = repository.findUsuarioByLogin(login);
         return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
     }
 
-    @PutMapping
+    @PatchMapping
     @Transactional
     public ResponseEntity editar (@RequestBody @Valid DadosEditarUsuario dados) {
         var usuario = repository.getReferenceById(dados.id());
         usuario.atualizarInformacoes(dados);
-
         return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
     }
 

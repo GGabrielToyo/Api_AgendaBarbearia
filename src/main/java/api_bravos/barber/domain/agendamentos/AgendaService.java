@@ -8,6 +8,7 @@ import api_bravos.barber.domain.usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -58,6 +59,12 @@ public class AgendaService {
 
         var agendamento = repositoryAgendamento.getReferenceById(dados.id());
         agendamento.cancelar(dados.motivo());
+    }
+
+    public LocalDate formatarDataParaQuery(String data) {
+        String dataSemHora = data.substring(0, 10);
+        LocalDate localDate = LocalDate.parse(dataSemHora);
+        return localDate;
     }
 
 }

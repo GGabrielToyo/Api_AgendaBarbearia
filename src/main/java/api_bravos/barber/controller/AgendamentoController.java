@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @RestController
 @RequestMapping("/agendamentos")
@@ -43,11 +45,11 @@ public class AgendamentoController {
           indisponíveis
     */
     @GetMapping("/{data}")
-    public void listarHorariosNaData(@PathVariable String data){
-        String dataSemFracaoSegundo = data.substring(0, data.length() - 5);
-        LocalDateTime localDateTime = LocalDateTime.parse(dataSemFracaoSegundo, DateTimeFormatter.ISO_DATE_TIME);
-
-        System.out.println(localDateTime);
+    public ResponseEntity<List<DadosDetalhamentoAgendamento>> listarHorariosNaData(@PathVariable String data){
+        LocalDate localDate = agenda.formatarDataParaQuery(data);
+        List<DadosDetalhamentoAgendamento> lista = repository.findAllByData(localDate);
+        
+        return ResponseEntity.ok(lista);
     }
 
 

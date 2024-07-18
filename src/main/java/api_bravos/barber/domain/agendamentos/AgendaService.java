@@ -3,6 +3,7 @@ package api_bravos.barber.domain.agendamentos;
 import api_bravos.barber.domain.ValidacaoException;
 import api_bravos.barber.domain.agendamentos.validacoes.agendamento.ValidadorAgendamento;
 import api_bravos.barber.domain.agendamentos.validacoes.cancelamento.ValidadorCancelamentoAgendamento;
+import api_bravos.barber.domain.barbeiro.Barbeiro;
 import api_bravos.barber.domain.barbeiro.BarbeiroRepository;
 import api_bravos.barber.domain.usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,12 @@ public class AgendaService {
         String dataSemHora = data.substring(0, 10);
         LocalDate localDate = LocalDate.parse(dataSemHora);
         return localDate;
+    }
+
+    public List<DadosDetalhamentoAgendamento> listarHorariosIndisponiveisPorBarbeiro(String data) {
+        LocalDate localDate = formatarDataParaQuery(data);
+        return repositoryAgendamento.findAllByData(localDate);
+
     }
 
 }

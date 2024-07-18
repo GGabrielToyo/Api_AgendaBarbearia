@@ -1,6 +1,7 @@
 package api_bravos.barber.controller;
 
 import api_bravos.barber.domain.agendamentos.*;
+import api_bravos.barber.domain.barbeiro.Barbeiro;
 import api_bravos.barber.domain.barbeiro.DadosDetalhamentoBarbeiro;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +40,11 @@ public class AgendamentoController {
         return ResponseEntity.ok(lista);
     }
 
-    /*
-    TODO Data chegando do front e sendo tratada para formato correto.
-        ->Fazer a query no banco buscando pela data para saber os horários
-          indisponíveis
-    */
+
     @GetMapping("/{data}")
     public ResponseEntity<List<DadosDetalhamentoAgendamento>> listarHorariosNaData(@PathVariable String data){
-        LocalDate localDate = agenda.formatarDataParaQuery(data);
-        List<DadosDetalhamentoAgendamento> lista = repository.findAllByData(localDate);
-        
-        return ResponseEntity.ok(lista);
+
+        return ResponseEntity.ok(agenda.listarHorariosIndisponiveisPorBarbeiro(data));
     }
 
 
